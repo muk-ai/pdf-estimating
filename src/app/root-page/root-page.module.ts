@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 
 import { RootPageRoutingModule } from './root-page-routing.module';
 import { RootPageComponent } from './root-page.component';
-
+import { NgxChartsModule } from '@swimlane/ngx-charts';
 
 @NgModule({
   declarations: [
@@ -11,6 +11,7 @@ import { RootPageComponent } from './root-page.component';
   ],
   imports: [
     CommonModule,
+    NgxChartsModule,
     RootPageRoutingModule
   ]
 })
