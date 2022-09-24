@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { multi } from './data';
 import { Color, ScaleType } from '@swimlane/ngx-charts';
+import * as shape from 'd3-shape';
 
 @Component({
   selector: 'app-root-page',
@@ -8,34 +8,44 @@ import { Color, ScaleType } from '@swimlane/ngx-charts';
   styleUrls: ['./root-page.component.scss'],
 })
 export class RootPageComponent implements OnInit {
-  multi: any[];
+  results = [
+    {
+      name: 'estimation',
+      series: [
+        {
+          name: '10 hours',
+          value: 0,
+        },
+        {
+          name: '18 hours',
+          value: 100,
+        },
+        {
+          name: '30 hours',
+          value: 0,
+        },
+      ],
+    },
+  ];
   view: [number, number] = [700, 300];
-
-  legend: boolean = true;
-  showLabels: boolean = true;
-  animations: boolean = true;
-  xAxis: boolean = true;
-  yAxis: boolean = true;
-  showYAxisLabel: boolean = true;
-  showXAxisLabel: boolean = true;
-  xAxisLabel: string = 'Year';
-  yAxisLabel: string = 'Population';
-  timeline: boolean = true;
-
+  legend = false;
+  showLabels = true;
+  animations = false;
+  xAxis = true;
+  yAxis = true;
+  showYAxisLabel = true;
+  showXAxisLabel = true;
+  xAxisLabel = 'Time';
+  yAxisLabel = 'Probability';
+  curve = shape.curveNatural;
   colorScheme: Color = {
-    domain: ['#5AA454', '#E44D25', '#CFC0BB', '#7aa3e5', '#a8385d', '#aae3f5'],
+    domain: ['#CFC0BB'],
     group: ScaleType.Ordinal,
     selectable: true,
     name: 'Customer Usage',
   };
 
-  constructor() {
-    this.multi = multi;
-  }
+  constructor() {}
 
-  ngOnInit(): void {}
-
-  onSelect(event: any) {
-    console.log(event);
-  }
+  ngOnInit() {}
 }
