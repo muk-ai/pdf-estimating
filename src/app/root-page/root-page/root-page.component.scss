@@ -1,0 +1,12 @@
+.input-list {
+  display: flex;
+  flex-flow: column;
+}
+
+.input-item + .input-item {
+  margin-top: 10px;
+}
+
+.block {
+  display: block;
+}
