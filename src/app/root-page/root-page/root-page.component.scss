@@ -1,0 +1,22 @@
+.container {
+  margin: 0 auto;
+  max-width: 520px;
+}
+
+.input-list {
+  display: flex;
+  flex-flow: column;
+}
+
+.input-item + .input-item {
+  margin-top: 10px;
+}
+
+.block {
+  display: block;
+}
+
+app-pdf-chart {
+  margin-top: 50px;
+  display: block;
+}

@@ -1,1 +1,17 @@
-<app-pdf-chart [optimistic]="10" [mode]="18" [pessimistic]="30"></app-pdf-chart>
+<div class="container">
+  <div class="input-list">
+    <div class="input-item">
+      <label for="optimistic" class="block">完成する可能性がゼロでなくなる日 (Nano % day)</label>
+      <input id="optimistic" type="number" [(ngModel)]="optimistic" />
+    </div>
+    <div class="input-item">
+      <label for="mode" class="block">完成する可能性が高い日</label>
+      <input id="mode" type="number" [(ngModel)]="mode" />
+    </div>
+    <div class="input-item">
+      <label for="pessimistic" class="block">99%完了しているであろう日</label>
+      <input id="pessimistic" type="number" [(ngModel)]="pessimistic" />
+    </div>
+  </div>
+  <app-pdf-chart [optimistic]="optimistic" [mode]="mode" [pessimistic]="pessimistic"></app-pdf-chart>
+</div>
