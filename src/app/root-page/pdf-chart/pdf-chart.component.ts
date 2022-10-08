@@ -68,13 +68,32 @@ export class PdfChartComponent implements OnInit, OnChanges {
 
   private buildSeries() {
     const data = Array(this.pessimistic + 1).fill(0);
-    data[this.mode] = 100;
-    const series = data.map((value, index) => {
+    const linearFunction = this.buildLinearFunction();
+    const series = data.map((_, index) => {
       return {
         name: `${index}`,
-        value,
+        value: linearFunction(index),
       };
     });
     return series;
+  }
+
+  private buildLinearFunction() {
+    const a1 = 100 / (this.mode - this.optimistic);
+    const a2 = 100 / (this.mode - this.pessimistic);
+    const f1 = (x: number) => a1 * (x - this.optimistic);
+    const f2 = (x: number) => a2 * (x - this.pessimistic);
+    const linearFunction = (value: number) => {
+      if (value < this.optimistic) {
+        return 0;
+      } else if (value < this.mode) {
+        return f1(value);
+      } else if (value < this.pessimistic) {
+        return f2(value);
+      } else {
+        return 0;
+      }
+    };
+    return linearFunction;
   }
 }
