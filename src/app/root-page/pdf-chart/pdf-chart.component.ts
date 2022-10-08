@@ -75,6 +75,8 @@ export class PdfChartComponent implements OnInit, OnChanges {
         value: quadraticFunction(index),
       };
     });
+    series[this.optimistic].value = 0.1;
+    series[this.pessimistic].value = 1;
     return series;
   }
 
