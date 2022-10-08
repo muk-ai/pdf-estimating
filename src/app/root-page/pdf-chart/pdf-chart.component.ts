@@ -45,6 +45,10 @@ export class PdfChartComponent implements OnInit, OnChanges {
   ngOnInit() {}
 
   ngOnChanges(_changes: SimpleChanges) {
+    if (!this.validInput()) {
+      return;
+    }
+
     this.results = [
       {
         name: 'estimation',
@@ -64,5 +68,13 @@ export class PdfChartComponent implements OnInit, OnChanges {
         ],
       },
     ];
+  }
+
+  private validInput() {
+    if (Number.isInteger(this.optimistic) && Number.isInteger(this.mode) && Number.isInteger(this.pessimistic)) {
+      return true;
+    } else {
+      return false;
+    }
   }
 }
