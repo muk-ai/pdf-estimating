@@ -49,23 +49,11 @@ export class PdfChartComponent implements OnInit, OnChanges {
       return;
     }
 
+    const series = this.buildSeries();
     this.results = [
       {
         name: 'estimation',
-        series: [
-          {
-            name: `${this.optimistic} hours`,
-            value: 0,
-          },
-          {
-            name: `${this.mode} hours`,
-            value: 100,
-          },
-          {
-            name: `${this.pessimistic} hours`,
-            value: 0,
-          },
-        ],
+        series,
       },
     ];
   }
@@ -76,5 +64,17 @@ export class PdfChartComponent implements OnInit, OnChanges {
     } else {
       return false;
     }
+  }
+
+  private buildSeries() {
+    const data = Array(this.pessimistic + 1).fill(0);
+    data[this.mode] = 100;
+    const series = data.map((value, index) => {
+      return {
+        name: `${index}`,
+        value,
+      };
+    });
+    return series;
   }
 }
