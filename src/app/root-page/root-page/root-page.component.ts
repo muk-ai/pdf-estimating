@@ -6,9 +6,9 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./root-page.component.scss'],
 })
 export class RootPageComponent implements OnInit {
-  optimistic = 10;
-  mode = 18;
-  pessimistic = 30;
+  optimistic = 5;
+  mode = 8;
+  pessimistic = 15;
 
   constructor() {}
 

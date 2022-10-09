@@ -45,24 +45,67 @@ export class PdfChartComponent implements OnInit, OnChanges {
   ngOnInit() {}
 
   ngOnChanges(_changes: SimpleChanges) {
+    if (!this.validInput()) {
+      return;
+    }
+
+    const series = this.buildSeries();
     this.results = [
       {
         name: 'estimation',
-        series: [
-          {
-            name: `${this.optimistic} hours`,
-            value: 0,
-          },
-          {
-            name: `${this.mode} hours`,
-            value: 100,
-          },
-          {
-            name: `${this.pessimistic} hours`,
-            value: 0,
-          },
-        ],
+        series,
       },
     ];
+  }
+
+  private validInput() {
+    if (Number.isInteger(this.optimistic) && Number.isInteger(this.mode) && Number.isInteger(this.pessimistic)) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
+  private buildSeries() {
+    const data = Array(this.pessimistic + 1).fill(0);
+    const quadraticFunction = this.buildQuadraticFunction();
+    const series = data.map((_, index) => {
+      return {
+        name: `${index}`,
+        value: quadraticFunction(index),
+      };
+    });
+    series[this.optimistic].value = 0.1;
+    series[this.pessimistic].value = 1;
+    return series;
+  }
+
+  private buildQuadraticFunction() {
+    const point1x = (this.mode + this.optimistic) / 2;
+    const point1y = 50;
+    const point2x = (this.pessimistic + this.mode) / 2;
+    const point2y = 50;
+    const a1 = point1y / (point1x - this.optimistic) ** 2;
+    const a2 = point2y / (point2x - this.mode) ** 2;
+    const f1 = (x: number) => a1 * (x - this.optimistic) ** 2;
+    const f2 = (x: number) => -a1 * (x - this.mode) ** 2 + 100;
+    const f3 = (x: number) => -a2 * (x - this.mode) ** 2 + 100;
+    const f4 = (x: number) => a2 * (x - this.pessimistic) ** 2;
+    const quadraticFunction = (value: number) => {
+      if (value < this.optimistic) {
+        return 0;
+      } else if (value < point1x) {
+        return f1(value);
+      } else if (value < this.mode) {
+        return f2(value);
+      } else if (value < point2x) {
+        return f3(value);
+      } else if (value < this.pessimistic) {
+        return f4(value);
+      } else {
+        return 0;
+      }
+    };
+    return quadraticFunction;
   }
 }
