@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { EstimateInput } from '../type';
 
 @Component({
   selector: 'app-root-page',
@@ -6,11 +7,13 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./root-page.component.scss'],
 })
 export class RootPageComponent implements OnInit {
-  optimistic = 5;
-  mode = 8;
-  pessimistic = 15;
+  estimateInput: EstimateInput | undefined;
 
   constructor() {}
 
   ngOnInit() {}
+
+  onChange(estimateInput: EstimateInput) {
+    this.estimateInput = estimateInput;
+  }
 }
