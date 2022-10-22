@@ -27,4 +27,19 @@ export class EstimateInputListComponent implements OnInit {
     };
     this.change.emit(data);
   }
+
+  onOptimisticChange(newValue: number) {
+    this.optimistic = newValue;
+    this.emit();
+  }
+
+  onModeChange(newValue: number) {
+    this.mode = newValue;
+    this.emit();
+  }
+
+  onPessimisticChange(newValue: number) {
+    this.pessimistic = newValue;
+    this.emit();
+  }
 }
