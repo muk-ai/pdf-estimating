@@ -8,10 +8,14 @@
       [(ngModel)]="optimistic"
       (ngModelChange)="onOptimisticChange($event)"
     />
+    <button (click)="onOptimisticChange(optimistic + 1)">+</button>
+    <button (click)="onOptimisticChange(optimistic - 1)">-</button>
   </div>
   <div class="input-item">
     <label for="mode" class="block">完成する可能性が高い日</label>
     <input id="mode" type="number" [min]="0" [value]="mode" [ngModel]="mode" (ngModelChange)="onModeChange($event)" />
+    <button (click)="onModeChange(mode + 1)">+</button>
+    <button (click)="onModeChange(mode - 1)">-</button>
   </div>
   <div class="input-item">
     <label for="pessimistic" class="block">99%完了しているであろう日</label>
@@ -22,5 +26,7 @@
       [ngModel]="pessimistic"
       (ngModelChange)="onPessimisticChange($event)"
     />
+    <button (click)="onPessimisticChange(pessimistic + 1)">+</button>
+    <button (click)="onPessimisticChange(pessimistic - 1)">-</button>
   </div>
 </div>
