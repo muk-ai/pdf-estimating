@@ -1,6 +1,8 @@
 import { ChangeDetectionStrategy, Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { EstimateInput } from '../type';
 
+const clamp = (num: number, min: number, max: number) => Math.min(Math.max(num, min), max);
+
 @Component({
   selector: 'app-estimate-input-list',
   templateUrl: './estimate-input-list.component.html',
@@ -29,17 +31,35 @@ export class EstimateInputListComponent implements OnInit {
   }
 
   onOptimisticChange(newValue: number) {
-    this.optimistic = newValue;
+    if (this.mode < newValue) {
+      this.mode = newValue;
+    }
+    if (this.pessimistic < newValue) {
+      this.pessimistic = newValue;
+    }
+    this.optimistic = clamp(newValue, 0, this.mode);
     this.emit();
   }
 
   onModeChange(newValue: number) {
-    this.mode = newValue;
+    if (newValue < this.optimistic) {
+      this.optimistic = Math.max(newValue, 0);
+    }
+    if (this.pessimistic < newValue) {
+      this.pessimistic = newValue;
+    }
+    this.mode = clamp(newValue, 0, this.pessimistic);
     this.emit();
   }
 
   onPessimisticChange(newValue: number) {
-    this.pessimistic = newValue;
+    if (newValue < this.optimistic) {
+      this.optimistic = Math.max(newValue, 0);
+    }
+    if (newValue < this.mode) {
+      this.mode = Math.max(newValue, 0);
+    }
+    this.pessimistic = clamp(newValue, 0, Infinity);
     this.emit();
   }
 }
