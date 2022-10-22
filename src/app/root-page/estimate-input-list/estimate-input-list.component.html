@@ -1,14 +1,26 @@
 <div class="input-list">
   <div class="input-item">
     <label for="optimistic" class="block">完成する可能性がゼロでなくなる日 (Nano % day)</label>
-    <input id="optimistic" type="number" [ngModel]="optimistic" (ngModelChange)="onOptimisticChange($event)" />
+    <input
+      id="optimistic"
+      type="number"
+      [min]="0"
+      [(ngModel)]="optimistic"
+      (ngModelChange)="onOptimisticChange($event)"
+    />
   </div>
   <div class="input-item">
     <label for="mode" class="block">完成する可能性が高い日</label>
-    <input id="mode" type="number" [ngModel]="mode" (ngModelChange)="onModeChange($event)" />
+    <input id="mode" type="number" [min]="0" [value]="mode" [ngModel]="mode" (ngModelChange)="onModeChange($event)" />
   </div>
   <div class="input-item">
     <label for="pessimistic" class="block">99%完了しているであろう日</label>
-    <input id="pessimistic" type="number" [ngModel]="pessimistic" (ngModelChange)="onPessimisticChange($event)" />
+    <input
+      id="pessimistic"
+      type="number"
+      [min]="0"
+      [ngModel]="pessimistic"
+      (ngModelChange)="onPessimisticChange($event)"
+    />
   </div>
 </div>
