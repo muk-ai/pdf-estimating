@@ -38,3 +38,10 @@ input[type='number'] {
 .block {
   display: block;
 }
+
+@media (pointer: coarse) {
+  button {
+    width: 50%;
+    height: 30px;
+  }
+}
