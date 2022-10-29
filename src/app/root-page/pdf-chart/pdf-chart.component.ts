@@ -31,7 +31,7 @@ export class PdfChartComponent implements OnInit, OnChanges {
   showXAxisLabel = true;
   xAxisLabel = 'Time';
   yAxisLabel = 'Probability';
-  curve = shape.curveNatural;
+  curve = shape.curveBasis;
   colorScheme: Color = {
     domain: ['#CFC0BB'],
     group: ScaleType.Ordinal,
