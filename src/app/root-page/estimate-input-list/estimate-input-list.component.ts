@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { ChangeDetectionStrategy, Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { EstimateInput } from '../type';
 
 const clamp = (num: number, min: number, max: number) => Math.min(Math.max(num, min), max);
@@ -10,15 +10,22 @@ const clamp = (num: number, min: number, max: number) => Math.min(Math.max(num, 
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class EstimateInputListComponent implements OnInit {
+  @Input() estimateInput?: EstimateInput;
   @Output() change = new EventEmitter<EstimateInput>();
-  optimistic = 5;
-  mode = 8;
-  pessimistic = 15;
+  optimistic = 0;
+  mode = 0;
+  pessimistic = 0;
 
   constructor() {}
 
   ngOnInit() {
-    this.emit();
+    if (!this.estimateInput) {
+      return;
+    }
+
+    this.optimistic = this.estimateInput.optimistic;
+    this.mode = this.estimateInput.mode;
+    this.pessimistic = this.estimateInput.pessimistic;
   }
 
   emit() {
