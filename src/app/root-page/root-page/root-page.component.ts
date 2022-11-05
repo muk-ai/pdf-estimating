@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { EstimateInput } from '../type';
 
 @Component({
@@ -10,7 +10,7 @@ import { EstimateInput } from '../type';
 export class RootPageComponent implements OnInit {
   estimateInput?: EstimateInput;
 
-  constructor(private route: ActivatedRoute) {}
+  constructor(private router: Router, private route: ActivatedRoute) {}
 
   ngOnInit() {
     const queryParamMap = this.route.snapshot.queryParamMap;
@@ -26,5 +26,14 @@ export class RootPageComponent implements OnInit {
 
   onChange(estimateInput: EstimateInput) {
     this.estimateInput = estimateInput;
+    const queryParams = {
+      o: estimateInput.optimistic,
+      m: estimateInput.mode,
+      p: estimateInput.pessimistic,
+    };
+    this.router.navigate([], {
+      queryParams,
+      replaceUrl: true,
+    });
   }
 }
