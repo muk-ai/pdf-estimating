@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import { EstimateInput } from '../type';
 
 @Component({
@@ -9,13 +10,17 @@ import { EstimateInput } from '../type';
 export class RootPageComponent implements OnInit {
   estimateInput?: EstimateInput;
 
-  constructor() {}
+  constructor(private route: ActivatedRoute) {}
 
   ngOnInit() {
+    const queryParamMap = this.route.snapshot.queryParamMap;
+    const optimistic = parseInt(queryParamMap.get('o') ?? '5', 10);
+    const mode = parseInt(queryParamMap.get('m') ?? '8', 10);
+    const pessimistic = parseInt(queryParamMap.get('p') ?? '15', 10);
     this.estimateInput = {
-      optimistic: 5,
-      mode: 8,
-      pessimistic: 15,
+      optimistic,
+      mode,
+      pessimistic,
     };
   }
 
