@@ -7,11 +7,17 @@ import { EstimateInput } from '../type';
   styleUrls: ['./root-page.component.scss'],
 })
 export class RootPageComponent implements OnInit {
-  estimateInput: EstimateInput | undefined;
+  estimateInput?: EstimateInput;
 
   constructor() {}
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.estimateInput = {
+      optimistic: 5,
+      mode: 8,
+      pessimistic: 15,
+    };
+  }
 
   onChange(estimateInput: EstimateInput) {
     this.estimateInput = estimateInput;

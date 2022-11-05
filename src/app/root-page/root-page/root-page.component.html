@@ -1,3 +1,3 @@
 <h1>見積りは確率分布になる</h1>
-<app-estimate-input-list (change)="onChange($event)"></app-estimate-input-list>
+<app-estimate-input-list [estimateInput]="estimateInput" (change)="onChange($event)"></app-estimate-input-list>
 <app-pdf-chart [estimateInput]="estimateInput"></app-pdf-chart>

@@ -18,7 +18,7 @@ interface ResultType {
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class PdfChartComponent implements OnInit, OnChanges {
-  @Input() estimateInput: EstimateInput | undefined;
+  @Input() estimateInput?: EstimateInput;
 
   results: ResultType[] = [];
   view: [number, number] = [700, 300];
